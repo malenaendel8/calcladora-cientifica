@@ -1,0 +1,77 @@
+using System;
+
+namespace CalculadoraBasica
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Configurar la consola para aceptar decimales correctamente según la región
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
+            Console.WriteLine("=== CALCULADORA BÁSICA EN C# ===");
+            Console.WriteLine("--------------------------------");
+
+            // 1. Pedir los números al usuario con validación TryParse
+            double numero1;
+            Console.Write("Introduce el primer número: ");
+            while (!double.TryParse(Console.ReadLine(), out numero1))
+            {
+                Console.Write("Entrada no válida. Por favor, introduce un número: ");
+            }
+
+            double numero2;
+            Console.Write("Introduce el segundo número: ");
+            while (!double.TryParse(Console.ReadLine(), out numero2))
+            {
+                Console.Write("Entrada no válida. Por favor, introduce un número: ");
+            }
+
+            Console.WriteLine("\n================================");
+            Console.WriteLine("            RESULTADOS          ");
+            Console.WriteLine("================================");
+
+            // 2. Realizar y mostrar las operaciones básicas
+            Console.WriteLine($"Suma:           {numero1} + {numero2} = {numero1 + numero2}");
+            Console.WriteLine($"Resta:          {numero1} - {numero2} = {numero1 - numero2}");
+            Console.WriteLine($"Multiplicación: {numero1} * {numero2} = {numero1 * numero2}");
+
+            // 3. Validación para la división (evitar dividir entre cero)
+            if (numero2 != 0)
+            {
+                Console.WriteLine($"División:       {numero1} / {numero2} = {numero1 / numero2}");
+            }
+            else
+            {
+                Console.WriteLine("División:       No se puede dividir entre cero.");
+            }
+
+            Console.WriteLine("--------------------------------");
+
+            // 4. Calcular raíces cuadradas (validando que no sean números negativos)
+            if (numero1 >= 0)
+            {
+                double raiz1 = Math.Sqrt(numero1);
+                Console.WriteLine($"Raíz cuadrada del primer número ({numero1}):  {raiz1:F4}");
+            }
+            else
+            {
+                Console.WriteLine($"Raíz cuadrada del primer número ({numero1}):  No existe raíz real de un número negativo.");
+            }
+
+            if (numero2 >= 0)
+            {
+                double raiz2 = Math.Sqrt(numero2);
+                Console.WriteLine($"Raíz cuadrada del segundo número ({numero2}): {raiz2:F4}");
+            }
+            else
+            {
+                Console.WriteLine($"Raíz cuadrada del segundo número ({numero2}): No existe raíz real de un número negativo.");
+            }
+
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("\nPresiona cualquier tecla para salir...");
+            Console.ReadKey();
+        }
+    }
+}
